@@ -64,13 +64,12 @@ async def tlinkgen(message: Message):
   #  reply_text = await message.reply_text("Please Wait...!", quote = True)
     try:
         post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
-    except FloodWait as e:
+    except FloodWait as e: 
         await asyncio.sleep(e.x)
         post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
     except Exception as e:
         print(e)
-    converted_id = await post_message.id * abs(client.db_channel.id)
-    string = await f"get-{converted_id}"
-    base64_string = await encode(string)
+    pmsg_id = await get_message_id(post_message)
+    base64_string = await encode(f"get-{pmsg_id * abs(client.db_channel.id)}")
     return f"https://telegram.me/{client.username}?start={base64_string}"
     
