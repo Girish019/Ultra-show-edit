@@ -7,6 +7,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from pyrogram.errors import FloodWait
 from plugins.data import DATAODD, DATAEVEN ,BOTEFITMSG, FOMET
 from plugins.cbb import DATEDAY
+from plugins.link_generator import tlinkgen
 from bot import Bot
 from config import ADMINS, CHANNEL_ID, DISABLE_CHANNEL_BUTTON
 from datetime import datetime
@@ -47,24 +48,9 @@ async def channel_post(client: Client, message: Message):
             chtid=message.chat.id
             bot_msg = await message.reply_text("Please Wait...!", quote = True) #reply text please wait... to bot
             await asyncio.sleep(1)
-    elif media.file_name not in ODDDATA(keys):
+    elif:
         pass
-    else:
-        pass      
-    try:
-        post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
-    except FloodWait as e:
-        await asyncio.sleep(e.x)
-        post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
-    except Exception as e:
-        print(e)
-        await reply_text.edit_text("Something went Wrong..!")
-        return
-    converted_id = post_message.id * abs(client.db_channel.id)
-    string = f"get-{converted_id}"
-    base64_string = await encode(string)
-    Tlink = f"https://telegram.me/{client.username}?start={base64_string}"
-    
+    Tlink = tlinkgen(message)
     Slink = await get_short(SL_URL, SL_API, Tlink) #generating short link with particular domine and api
     await bot_msg.edit("Analysing....!")
     await asyncio.sleep(1)
