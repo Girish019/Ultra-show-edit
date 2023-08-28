@@ -48,7 +48,7 @@ async def channel_post(client: Client, message: Message):
             chtid=message.chat.id
             bot_msg = await message.reply_text("Please Wait...!", quote = True) #reply text please wait... to bot
             await asyncio.sleep(1)
-    elif:
+    else:
         pass
     Tlink = tlinkgen(message)
     Slink = await get_short(SL_URL, SL_API, Tlink) #generating short link with particular domine and api
