@@ -4,7 +4,7 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from bot import Bot
 from pyrogram.errors import FloodWait
-from config import ADMINS
+from config import ADMINS, CHANNEL_ID
 from helper_func import encode, get_message_id
 
 @Bot.on_message(filters.private & filters.user(ADMINS) & filters.command('batch'))
@@ -60,17 +60,17 @@ async def link_generator(client: Client, message: Message):
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
     await channel_message.reply_text(f"<b>Here is your link</b>\n\n{link}\n\n<code>{link}</code>", quote=True, reply_markup=reply_markup)
 
-async def tlinkgen(client: Client, message):
+async def tlinkgen(message: Message):
   #  reply_text = await message.reply_text("Please Wait...!", quote = True)
     try:
-        post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
+        post_msg = await message.copy(chat_id=CHANNEL_ID, disable_notification=True)
     except FloodWait as e: 
         await asyncio.sleep(e.x)
-        post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
+        post_msg = await message.copy(chat_id=CHANNEL_ID, disable_notification=True)
     except Exception as e:
         print(e)
     await asyncio.sleep(5)
-    pmsg_id = await get_message_id(post_message)
-    base64_string = await encode(f"get-{pmsg_id * abs(client.db_channel.id)}")
-    return f"https://telegram.me/{client.username}?start={base64_string}"
+    base64_string = await encode(f"get-{post_msg.id * abs(client.db_channel.id)}")
+    link = f"https://telegram.me/{client.username}?start={base64_string}"
+    return link
     
