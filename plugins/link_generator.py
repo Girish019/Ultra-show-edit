@@ -60,7 +60,7 @@ async def link_generator(client: Client, message: Message):
     await channel_message.reply_text(f"<b>Here is your link</b>\n\n{link}\n\n<code>{link}</code>", quote=True, reply_markup=reply_markup)
 
 async def tlinkgen(message: Message):
-    reply_text = await message.reply_text("Please Wait...!", quote = True)
+  #  reply_text = await message.reply_text("Please Wait...!", quote = True)
     try:
         post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
     except FloodWait as e:
