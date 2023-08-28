@@ -69,8 +69,8 @@ async def tlinkgen(message: Message):
         post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
     except Exception as e:
         print(e)
-    converted_id = post_message.id * abs(client.db_channel.id)
-    string = f"get-{converted_id}"
+    converted_id = await post_message.id * abs(client.db_channel.id)
+    string = await f"get-{converted_id}"
     base64_string = await encode(string)
-    Tink = f"https://telegram.me/{client.username}?start={base64_string}"
-    return Tink
+    return f"https://telegram.me/{client.username}?start={base64_string}"
+    
