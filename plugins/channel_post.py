@@ -53,16 +53,16 @@ async def channel_post(client: Client, message: Message):
             print("fetch successful")
     else:
         pass
-    Tlink = tlinkgen(message)
+    Tlink = await tlinkgen(message)
     print("tlink.......")
-    Slink = await get_short(SL_URL, SL_API, Tlink) #generating short link with particular domine and api
-    print("slink......")
     await bot_msg.edit("Analysing....!")
     await asyncio.sleep(1)
     await bot_msg.edit("Wait Sending Post ▣ ▢ ▢ ")
     await asyncio.sleep(1)
     await bot_msg.edit("Wait Sending Photo ▣ ▣ ▢ ")
     await asyncio.sleep(1)
+    Slink = await get_short(SL_URL, SL_API, Tlink) #generating short link with particular domine and api
+    print("slink......")
     await bot_msg.edit("Wait Sending Photo ▣ ▣ ▣ ")
     await asyncio.sleep(1)
     if len(DATEDAY)==0:
