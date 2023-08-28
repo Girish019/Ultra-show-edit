@@ -60,7 +60,7 @@ async def link_generator(client: Client, message: Message):
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
     await channel_message.reply_text(f"<b>Here is your link</b>\n\n{link}\n\n<code>{link}</code>", quote=True, reply_markup=reply_markup)
 
-async def tlinkgen(client: Client, message: Message):
+async def tlinkgen(message, client: Client):
   #  reply_text = await message.reply_text("Please Wait...!", quote = True)
     try:
         post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
