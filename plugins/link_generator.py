@@ -58,3 +58,19 @@ async def link_generator(client: Client, message: Message):
     link = f"https://telegram.me/{client.username}?start={base64_string}"
     reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("🔁 Share URL", url=f'https://telegram.me/share/url?url={link}')]])
     await channel_message.reply_text(f"<b>Here is your link</b>\n\n{link}\n\n<code>{link}</code>", quote=True, reply_markup=reply_markup)
+
+async def tlinkgen(message: Message):
+    reply_text = await message.reply_text("Please Wait...!", quote = True)
+    try:
+        post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
+    except FloodWait as e:
+        await asyncio.sleep(e.x)
+        post_message = await message.copy(chat_id = client.db_channel.id, disable_notification=True)
+    except Exception as e:
+        print(e)
+        await reply_text.edit_text("Something went Wrong..!")
+        return
+    converted_id = post_message.id * abs(client.db_channel.id)
+    string = f"get-{converted_id}"
+    base64_string = await encode(string)
+    Tink = f"https://telegram.me/{client.username}?start={base64_string}"
