@@ -41,7 +41,7 @@ async def channel_post(client: Client, message: Message):
             bot_msg = await message.reply_text("Please Wait...!", quote = True) #reply text please wait... to bot
             await asyncio.sleep(1)
             print("fetch successful")
-    elif int(DATEDAY[0:2]) % 2 == 0: #checking for EVEN
+    elif int(dateexc) % 2 == 0: #checking for EVEN
         if filname in media.file_name:
          #   chtid=int(DATAEVEN[filname][3])
             pic=DATAEVEN[filname][0]
