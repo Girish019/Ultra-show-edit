@@ -53,7 +53,7 @@ async def channel_post(client: Client, message: Message):
             print("fetch successful")
     else:
         pass
-    Tlink = await tlinkgen(message)
+    Tlink = await tlinkgen(client: Client, message: Message)
     print("tlink.......")
     await bot_msg.edit("Analysing....!")
     await asyncio.sleep(1)
