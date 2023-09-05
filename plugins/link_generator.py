@@ -74,5 +74,5 @@ async def tlinkgen(client, message):
     base64_string = await encode(f"get-{post_msg.id * abs(CHANNEL_ID)}")
     link = f"https://telegram.me/{client.username}?start={base64_string}"
  #   link = f"https://telegram.me/Newfs2bot?start={base64_string}"
-    return link
+    return await link
     
