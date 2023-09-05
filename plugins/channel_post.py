@@ -26,7 +26,8 @@ async def date(bot, message):
 
 @Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.text )
 async def channel_post(client: Client, message: Message):
-    global message, client
+    global message = msg
+    global client = claint
   #  dateexc = datetime.now().strftime("%d")
     media = message.video or message.document
     filname= media.file_name.split("S0")[0]#[1][2]etc
@@ -53,7 +54,7 @@ async def channel_post(client: Client, message: Message):
             print("fetch successful")
     else:
         pass
-    Tlink = await tlinkgen(client, message)
+    Tlink = await tlinkgen(claint, msg)
     print("tlink.......")
     await bot_msg.edit("Analysing....!")
     await asyncio.sleep(1)
