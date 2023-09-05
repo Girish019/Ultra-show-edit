@@ -26,11 +26,10 @@ async def date(bot, message):
 
 @Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.text )
 async def channel_post(client: Client, message: Message):
-    dateexc = datetime.now().strftime("%d")
+  #  dateexc = datetime.now().strftime("%d")
     media = message.video or message.document
     filname= media.file_name.split("S0")[0]#[1][2]etc
     botfsno= re.findall("S0.+E\d+\d", media.file_name)
-    print("yes find all")
     if int(DATEDAY[-1][0:2]) % 2 != 0:#chaeking for ODD
         if filname in media.file_name: #matching name in dict key with arrival video file name
            # chtid=int(DATAODD[filname][3])#for particuler channel id
@@ -41,7 +40,7 @@ async def channel_post(client: Client, message: Message):
             bot_msg = await message.reply_text("Please Wait...!", quote = True) #reply text please wait... to bot
             await asyncio.sleep(1)
             print("fetch successful")
-    elif int(dateexc) % 2 == 0: #checking for EVEN
+    elif int(DATEDAY[-1][0:2]) % 2 == 0: #checking for EVEN
         if filname in media.file_name:
          #   chtid=int(DATAEVEN[filname][3])
             pic=DATAEVEN[filname][0]
@@ -53,7 +52,7 @@ async def channel_post(client: Client, message: Message):
             print("fetch successful")
     else:
         pass
-    Tlink = await tlinkgen(client: Client, message: Message)
+    Tlink = await tlinkgen(Client, Message)
     print("tlink.......")
     await bot_msg.edit("Analysing....!")
     await asyncio.sleep(1)
