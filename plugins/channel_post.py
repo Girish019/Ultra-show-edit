@@ -26,12 +26,12 @@ async def date(bot, message):
 
 @Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.text )
 async def channel_post(client: Client, message: Message):
-    dateexc = datetime.now().strftime("%d")
+  #  dateexc = datetime.now().strftime("%d")
     media = message.video or message.document
     filname= media.file_name.split("S0")[0]#[1][2]etc
     botfsno= re.findall("S0.+E\d+\d", media.file_name)
     print("yes find all")
-    if int(dateexc) % 2 != 0:#chaeking for ODD
+    if int(DATEDAY) % 2 != 0:#chaeking for ODD
         if filname in media.file_name: #matching name in dict key with arrival video file name
            # chtid=int(DATAODD[filname][3])#for particuler channel id
             pic=DATAODD[filname][0] #particuler images
