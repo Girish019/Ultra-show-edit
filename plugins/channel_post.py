@@ -26,8 +26,10 @@ async def date(bot, message):
 
 @Bot.on_message(filters.private & filters.user(ADMINS) & ~filters.text )
 async def channel_post(client: Client, message: Message):
-    global message = msg
-    global client = claint
+    global message
+    message = msg
+    global client
+    client = claint
   #  dateexc = datetime.now().strftime("%d")
     media = message.video or message.document
     filname= media.file_name.split("S0")[0]#[1][2]etc
